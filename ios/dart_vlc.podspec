@@ -34,7 +34,13 @@ Pod::Spec.new do |s|
     }, {
         :name => 'Build Device lib',
         :show_env_vars_in_log => true,
-        :script => 'xcodebuild -project core/dart_vlc_core.xcodeproj '\
+        :script => 'cmake -Bcore '\
+        '${PODS_TARGET_SRCROOT}/../core '\
+        '-DCMAKE_INSTALL_PREFIX:PATH=${PODS_TARGET_SRCROOT}/deps '\
+        '-GXcode '\
+        '-DCMAKE_SYSTEM_NAME=iOS && '\
+        'pwd && '\
+        'xcodebuild -project core/dart_vlc_core.xcodeproj '\
         '-sdk iphoneos '\
         '-scheme dart_vlc_core '\
         'CONFIGURATION_BUILD_DIR=${PODS_TARGET_SRCROOT}/deps/device',
